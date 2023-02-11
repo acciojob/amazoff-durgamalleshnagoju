@@ -21,6 +21,9 @@ public class OrderRepository {
     }
 
     public Order getOrder(String id) {
+        if(!orderDb.containsKey(id)){
+            return new Order();
+        }
         return orderDb.get(id);
     }
 
@@ -29,6 +32,9 @@ public class OrderRepository {
     }
 
     public DeliveryPartner getDeliveryPartnerDb(String id) {
+        if(!deliveryPartnerDb.containsKey(id)){
+            return new DeliveryPartner();
+        }
         return deliveryPartnerDb.get(id);
 
     }
@@ -59,7 +65,9 @@ public class OrderRepository {
     }
 
     public void setOrderPartnerDb(String OrderId, String partnerId){
-
+        if(!orderDb.containsKey(OrderId) || !deliveryPartnerDb.containsKey(partnerId)){
+            return;
+        }
         Order order = orderDb.get(OrderId);
         DeliveryPartner deliveryPartner = deliveryPartnerDb.get(partnerId);
         deliveryPartner.setNumberOfOrders(deliveryPartner.getNumberOfOrders()+1);
@@ -71,9 +79,15 @@ public class OrderRepository {
         return orderDb;
     }
     public void deleteOrder(String id){
+        if(!orderDb.containsKey(id)){
+            return;
+        }
         orderDb.remove(id);
     }
     public void deletePartner(String partnerId){
+        if(!deliveryPartnerDb.containsKey(partnerId)){
+            return;
+        }
         if(deliveryPartnerOderDb.containsKey(partnerId)){
             List<String> orders = deliveryPartnerOderDb.get(partnerId);
             for(String order: orders){

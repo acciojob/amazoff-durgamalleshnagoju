@@ -81,7 +81,7 @@ public class OrderService {
     }
 
     public Integer getCountOfUnassignedOrders(){
-        Integer countOfOrders = 0;
+        int countOfOrders = 0;
 
         //Count of orders that have not been assigned to any DeliveryPartner
 
