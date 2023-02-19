@@ -1,22 +1,33 @@
 package com.driver;
 
+
+import org.apache.logging.log4j.message.Message;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
 @Repository
 public class OrderRepository {
+    //First we will create databases
+    //We require total 3 databases
 
-    private HashMap<String, Order> orderDatabase = new HashMap<>();
-    
-    private HashMap<String, DeliveryPartner> partnerDatabase = new HashMap<>();
+    //First one is order database named as orderDatabase
+    private Map<String,Order> orderDatabase;
 
-    private HashMap<String, List<String>> partnerOrderMap = new HashMap<>();
+    //Second one is delivery partner database named as partnerDatabase
+    private Map<String,DeliveryPartner> partnerDatabase;
 
-    private Set<String> orderNotAssigned = new HashSet<>();
+    //Third one is order-partner pair database named as partnerOrderMap
+    private Map<String, List<String>> partnerOrderMap;
 
-    OrderRepository(){
+    private Set<String> orderNotAssigned;
 
+
+    public OrderRepository() {
+        this.orderDatabase = new HashMap<>();
+        this.partnerDatabase = new HashMap<>();
+        this.partnerOrderMap = new HashMap<>();
+        this.orderNotAssigned =  new HashSet<>();
     }
 
     public void addOrder(Order order){
